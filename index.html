@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>GaitAgent App</title>
-<meta name="description" content="GaitAgent: a mobile application for fine-grained pediatric gait assessment, deployable on smartphones and AR glasses." />
+<title>GaitAgent: Pediatric Gait Support for Parents &amp; Clinicians</title>
+<meta name="description" content="GaitAgent: A versatile mobile application for pediatric gait assessment and early intervention, designed for both parents and clinicians." />
 <link rel="icon" type="image/x-icon" href="logo-transparent_256x256.ico?v=2" />
 <link rel="icon" type="image/png" href="static/images/logo-transparent.png" />
 <link rel="apple-touch-icon" href="static/images/logo-transparent.png" />
@@ -150,7 +150,7 @@
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
   .hero-sub{
-    margin-top:24px;max-width:62ch;font-size:clamp(16px,1.6vw,20px);color:#c8c6d6;
+    margin-top:10px;max-width:70ch;font-size:clamp(16px,1.6vw,20px);color:#c8c6d6;
   }
   .hero-cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:14px}
   .btn{
@@ -171,7 +171,7 @@
   .btn:hover .arrow{transform:translateX(4px)}
 
   .hero-meta{
-    margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+    margin-top:10px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
     padding-top:32px;border-top:1px solid var(--line);
   }
   .hero-meta div{font-size:13px;color:var(--muted)}
@@ -694,12 +694,13 @@
       fetchpriority="high"
     />
   </div>
-  <h1 class="hero-title" id="heroTitle">GaitAgent App</h1>
+  <h1 class="hero-title" id="heroTitle">GaitAgent</h1>
   <p class="hero-sub">
-    GaitAgent is a versatile mobile application deployable on smartphones and AR glasses. It analyzes live walking video, scores EVGS in real time, and answers clinical questions through a built-in VLM.
+    GaitAgent is a versatile application for parents and clinicians to monitor pediatric gait. From Cerebral Palsy assessment to early screening for typically developing children, we provide the tools for timely correction and expert guidance. The paper of the core algorithm in GaitAgent has been accepted by ECCV 2026 with title Decoding Children's Gait Behavior.
   </p>
   <div class="hero-cta">
     <a href="#demo" class="btn primary">Watch demo <span class="arrow">→</span></a>
+    <a href="https://pediamedai.com/ChildrenGait/" class="btn primary">ChildGait-video Project<span class="arrow">→</span></a>
     <a href="#overview" class="btn ghost">Read the overview</a>
   </div>
   <div class="hero-meta">
@@ -715,11 +716,9 @@
   <div class="overview-hero">
     <div class="reveal">
       <p class="overview-kicker">Project overview</p>
-      <h2 class="overview-headline">From offline review to a versatile mobile app.</h2>
+      <h2 class="overview-headline">From offline review to proactive early intervention.</h2>
       <p class="overview-lead">
-        GaitAgent turns live walking video into fine-grained pediatric gait analysis,
-        automated EVGS scoring, and interactive clinical Q&amp;A — a cross-platform
-        mobile application for smartphones and AR glasses.
+        GaitAgent turns live walking video into fine-grained pediatric gait analysis, automated EVGS scoring, and interactive guidance. Beyond assessing neurological conditions like Cerebral Palsy, it serves as a critical early-screening tool for typically developing children. Much like pediatric orthodontics, catching minor gait abnormalities early empowers parents and clinicians to work together on timely, preventative corrections—all through an easy-to-use mobile application.
       </p>
     </div>
   </div>
@@ -748,10 +747,10 @@
     </article>
     <article class="overview-card reveal">
       <div class="overview-card-ico" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 00-2 2v4a6 6 0 0012 0V5a2 2 0 00-2-2h-1"/><path d="M8 15a6 6 0 0012 0v-3"/><circle cx="20" cy="10" r="2"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>
       </div>
-      <h3>Clinician-facing output</h3>
-      <p>Returns reviewable EVGS scores and grounded Q&amp;A responses — support for the clinician, not autonomous diagnosis.</p>
+      <h3>Expert guidance for all</h3>
+      <p>Returns reviewable EVGS scores and grounded Q&amp;A responses — support for both parents and clinicians, not autonomous diagnosis.</p>
     </article>
   </div>
 </section>
@@ -996,7 +995,7 @@
   <span class="eyebrow reveal">05 · App Deployment</span>
   <h2 class="section-title reveal">Deploy on smartphones<br/>and AR glasses.</h2>
   <p class="section-lead reveal">
-    GaitAgent is built for flexibility. It deploys seamlessly as a mobile application across smartphones and AR glasses, turning everyday hardware into powerful point-of-care clinical tools.
+    GaitAgent is built for flexibility. It deploys seamlessly as a mobile application across smartphones and AR glasses, turning everyday hardware into powerful tools for parents and clinicians alike.
   </p>
 
   <div class="hw-features" style="margin-top: 40px;">
@@ -1037,7 +1036,7 @@
   <span class="eyebrow reveal">06 · App Safety Boundary</span>
   <h2 class="section-title reveal">Clinical support,<br/>not autonomous care.</h2>
   <p class="section-lead reveal">
-    The GaitAgent app analyzes walking patterns, surfaces evidence, and reduces cognitive burden while keeping human experts in control.
+    The GaitAgent app analyzes walking patterns, surfaces evidence, and reduces cognitive burden while keeping human experts—parents and clinicians—in control.
   </p>
 
   <div class="hw-features" style="margin-top: 36px; gap: 18px;">
@@ -1045,8 +1044,8 @@
       <div class="overview-card-ico" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
       </div>
-      <h3>Decision support only</h3>
-      <p>GaitAgent is framed as clinician-facing assistance rather than autonomous diagnosis.</p>
+      <h3>Support only</h3>
+      <p>GaitAgent is framed as assistance for monitoring rather than autonomous diagnosis.</p>
     </article>
 
     <article class="overview-card reveal">
@@ -1180,8 +1179,8 @@
 <footer>
   <div class="foot-row">
     <div class="brand"><span class="brand-dot"></span> GaitAgent App</div>
-    <div>© 2026 GaitAgent Research · Research preview · For clinical evaluation, not autonomous care.</div>
-    <div>Designed for clinicians. The future of XR gait apps.</div>
+    <div>© 2026 GaitAgent Research · Research preview · For parents and clinicians.</div>
+    <div>Designed for families and experts. The future of pediatric gait support.</div>
   </div>
 </footer>
 
