@@ -1,0 +1,160 @@
+{
+  "_comment": [
+    "Latent patient profiles for the mock gait analyzer.",
+    "Each value is the probability that the EVGS item is scored ATYPICAL for that limb.",
+    "Tune these to change what the demo shows; no recompile needed.",
+    "Item codes are defined in data/model/Evgs.kt and follow Table 1 of the CGV paper."
+  ],
+  "profiles": [
+    {
+      "id": "typical",
+      "displayName": "typical development",
+      "summary": "no consistent deviation across the observed passes",
+      "weight": 0.18,
+      "items": {
+        "IC":  { "left": 0.06, "right": 0.06 },
+        "HL":  { "left": 0.05, "right": 0.05 },
+        "SAD": { "left": 0.08, "right": 0.08 },
+        "HVV": { "left": 0.09, "right": 0.09 },
+        "FRT": { "left": 0.10, "right": 0.10 },
+        "FCL": { "left": 0.04, "right": 0.04 },
+        "WAD": { "left": 0.07, "right": 0.07 },
+        "KPA": { "left": 0.08, "right": 0.08 },
+        "KEX": { "left": 0.06, "right": 0.06 },
+        "KPS": { "left": 0.05, "right": 0.05 },
+        "KFX": { "left": 0.07, "right": 0.07 },
+        "HEX": { "left": 0.05, "right": 0.05 },
+        "HFX": { "left": 0.05, "right": 0.05 },
+        "POB": { "left": 0.07, "right": 0.07 },
+        "PRT": { "left": 0.07, "right": 0.07 },
+        "TSG": { "left": 0.05, "right": 0.05 },
+        "TLT": { "left": 0.08, "right": 0.08 }
+      }
+    },
+    {
+      "id": "itw",
+      "displayName": "idiopathic toe walking",
+      "summary": "bilateral equinus at initial contact with preserved proximal control",
+      "weight": 0.18,
+      "items": {
+        "IC":  { "left": 0.92, "right": 0.90 },
+        "HL":  { "left": 0.88, "right": 0.86 },
+        "SAD": { "left": 0.84, "right": 0.82 },
+        "HVV": { "left": 0.22, "right": 0.20 },
+        "FRT": { "left": 0.18, "right": 0.18 },
+        "FCL": { "left": 0.34, "right": 0.32 },
+        "WAD": { "left": 0.74, "right": 0.72 },
+        "KPA": { "left": 0.14, "right": 0.14 },
+        "KEX": { "left": 0.44, "right": 0.42 },
+        "KPS": { "left": 0.26, "right": 0.24 },
+        "KFX": { "left": 0.20, "right": 0.20 },
+        "HEX": { "left": 0.18, "right": 0.18 },
+        "HFX": { "left": 0.16, "right": 0.16 },
+        "POB": { "left": 0.08, "right": 0.08 },
+        "PRT": { "left": 0.09, "right": 0.09 },
+        "TSG": { "left": 0.12, "right": 0.12 },
+        "TLT": { "left": 0.10, "right": 0.10 }
+      }
+    },
+    {
+      "id": "hemiplegia_left",
+      "displayName": "left spastic hemiplegia",
+      "summary": "unilateral left-sided deviation with a compensating right limb",
+      "weight": 0.16,
+      "items": {
+        "IC":  { "left": 0.90, "right": 0.14 },
+        "HL":  { "left": 0.82, "right": 0.12 },
+        "SAD": { "left": 0.86, "right": 0.16 },
+        "HVV": { "left": 0.54, "right": 0.12 },
+        "FRT": { "left": 0.62, "right": 0.18 },
+        "FCL": { "left": 0.70, "right": 0.10 },
+        "WAD": { "left": 0.80, "right": 0.14 },
+        "KPA": { "left": 0.56, "right": 0.16 },
+        "KEX": { "left": 0.62, "right": 0.18 },
+        "KPS": { "left": 0.50, "right": 0.14 },
+        "KFX": { "left": 0.66, "right": 0.16 },
+        "HEX": { "left": 0.52, "right": 0.20 },
+        "HFX": { "left": 0.46, "right": 0.18 },
+        "POB": { "left": 0.50, "right": 0.34 },
+        "PRT": { "left": 0.46, "right": 0.30 },
+        "TSG": { "left": 0.40, "right": 0.36 },
+        "TLT": { "left": 0.52, "right": 0.44 }
+      }
+    },
+    {
+      "id": "hemiplegia_right",
+      "displayName": "right spastic hemiplegia",
+      "summary": "unilateral right-sided deviation with a compensating left limb",
+      "weight": 0.16,
+      "items": {
+        "IC":  { "left": 0.14, "right": 0.90 },
+        "HL":  { "left": 0.12, "right": 0.82 },
+        "SAD": { "left": 0.16, "right": 0.86 },
+        "HVV": { "left": 0.12, "right": 0.54 },
+        "FRT": { "left": 0.18, "right": 0.62 },
+        "FCL": { "left": 0.10, "right": 0.70 },
+        "WAD": { "left": 0.14, "right": 0.80 },
+        "KPA": { "left": 0.16, "right": 0.56 },
+        "KEX": { "left": 0.18, "right": 0.62 },
+        "KPS": { "left": 0.14, "right": 0.50 },
+        "KFX": { "left": 0.16, "right": 0.66 },
+        "HEX": { "left": 0.20, "right": 0.52 },
+        "HFX": { "left": 0.18, "right": 0.46 },
+        "POB": { "left": 0.34, "right": 0.50 },
+        "PRT": { "left": 0.30, "right": 0.46 },
+        "TSG": { "left": 0.36, "right": 0.40 },
+        "TLT": { "left": 0.44, "right": 0.52 }
+      }
+    },
+    {
+      "id": "diplegia",
+      "displayName": "spastic diplegia",
+      "summary": "bilateral crouch pattern involving knee and hip through stance",
+      "weight": 0.16,
+      "items": {
+        "IC":  { "left": 0.80, "right": 0.78 },
+        "HL":  { "left": 0.76, "right": 0.74 },
+        "SAD": { "left": 0.82, "right": 0.80 },
+        "HVV": { "left": 0.56, "right": 0.54 },
+        "FRT": { "left": 0.52, "right": 0.50 },
+        "FCL": { "left": 0.60, "right": 0.58 },
+        "WAD": { "left": 0.70, "right": 0.68 },
+        "KPA": { "left": 0.62, "right": 0.60 },
+        "KEX": { "left": 0.86, "right": 0.84 },
+        "KPS": { "left": 0.60, "right": 0.58 },
+        "KFX": { "left": 0.72, "right": 0.70 },
+        "HEX": { "left": 0.82, "right": 0.80 },
+        "HFX": { "left": 0.52, "right": 0.50 },
+        "POB": { "left": 0.50, "right": 0.48 },
+        "PRT": { "left": 0.50, "right": 0.48 },
+        "TSG": { "left": 0.64, "right": 0.64 },
+        "TLT": { "left": 0.52, "right": 0.50 }
+      }
+    },
+    {
+      "id": "intoeing",
+      "displayName": "in-toeing gait",
+      "summary": "transverse-plane rotation with an otherwise unremarkable sagittal profile",
+      "weight": 0.16,
+      "items": {
+        "IC":  { "left": 0.14, "right": 0.14 },
+        "HL":  { "left": 0.12, "right": 0.12 },
+        "SAD": { "left": 0.16, "right": 0.16 },
+        "HVV": { "left": 0.44, "right": 0.42 },
+        "FRT": { "left": 0.88, "right": 0.86 },
+        "FCL": { "left": 0.10, "right": 0.10 },
+        "WAD": { "left": 0.14, "right": 0.14 },
+        "KPA": { "left": 0.82, "right": 0.80 },
+        "KEX": { "left": 0.16, "right": 0.16 },
+        "KPS": { "left": 0.14, "right": 0.14 },
+        "KFX": { "left": 0.18, "right": 0.18 },
+        "HEX": { "left": 0.16, "right": 0.16 },
+        "HFX": { "left": 0.18, "right": 0.18 },
+        "POB": { "left": 0.36, "right": 0.34 },
+        "PRT": { "left": 0.42, "right": 0.40 },
+        "TSG": { "left": 0.12, "right": 0.12 },
+        "TLT": { "left": 0.20, "right": 0.20 }
+      }
+    }
+  ]
+}

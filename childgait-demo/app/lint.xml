@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!--
+      Lint suggests folding mipmap-anydpi-v26 into mipmap-anydpi because minSdk is already 26.
+      Doing so makes the resource merger drop the icons entirely and the build fails with
+      "resource mipmap/ic_launcher not found" — the -v26 qualifier is still required for
+      adaptive icons. Suppressed deliberately, not overlooked.
+    -->
+    <issue id="ObsoleteSdkInt">
+        <ignore path="src/main/res/mipmap-anydpi-v26" />
+    </issue>
+
+    <!--
+      Dependency freshness is pinned deliberately in gradle/libs.versions.toml so the build is
+      reproducible; upgrades are a deliberate act, not a lint finding.
+    -->
+    <issue id="GradleDependency" severity="informational" />
+    <issue id="AndroidGradlePluginVersion" severity="informational" />
+</lint>

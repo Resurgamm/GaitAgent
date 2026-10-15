@@ -1,0 +1,214 @@
+{
+  "patternSummary": "Findings consistent with right spastic hemiplegia \u2014 unilateral right-sided deviation with a compensating left limb.",
+  "clipQuality": {
+    "SAGITTAL_L": 0.88,
+    "SAGITTAL_R": 0.86,
+    "CORONAL": 0.81
+  },
+  "scores": [
+    {
+      "item": "IC",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.85
+    },
+    {
+      "item": "IC",
+      "limb": "R",
+      "label": "ATYPICAL",
+      "confidence": 0.89
+    },
+    {
+      "item": "HL",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.92
+    },
+    {
+      "item": "HL",
+      "limb": "R",
+      "label": "ATYPICAL",
+      "confidence": 0.85
+    },
+    {
+      "item": "SAD",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.81
+    },
+    {
+      "item": "SAD",
+      "limb": "R",
+      "label": "ATYPICAL",
+      "confidence": 0.74
+    },
+    {
+      "item": "HVV",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.88
+    },
+    {
+      "item": "HVV",
+      "limb": "R",
+      "label": "ATYPICAL",
+      "confidence": 0.83
+    },
+    {
+      "item": "FRT",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.92
+    },
+    {
+      "item": "FRT",
+      "limb": "R",
+      "label": "ATYPICAL",
+      "confidence": 0.88
+    },
+    {
+      "item": "FCL",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.89
+    },
+    {
+      "item": "FCL",
+      "limb": "R",
+      "label": "ATYPICAL",
+      "confidence": 0.93
+    },
+    {
+      "item": "WAD",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.7
+    },
+    {
+      "item": "WAD",
+      "limb": "R",
+      "label": "ATYPICAL",
+      "confidence": 0.85
+    },
+    {
+      "item": "KPA",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.84
+    },
+    {
+      "item": "KPA",
+      "limb": "R",
+      "label": "TYPICAL",
+      "confidence": 0.8
+    },
+    {
+      "item": "KEX",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.74
+    },
+    {
+      "item": "KEX",
+      "limb": "R",
+      "label": "ATYPICAL",
+      "confidence": 0.92
+    },
+    {
+      "item": "KPS",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.82
+    },
+    {
+      "item": "KPS",
+      "limb": "R",
+      "label": "TYPICAL",
+      "confidence": 0.86
+    },
+    {
+      "item": "KFX",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.78
+    },
+    {
+      "item": "KFX",
+      "limb": "R",
+      "label": "ATYPICAL",
+      "confidence": 0.81
+    },
+    {
+      "item": "HEX",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.85
+    },
+    {
+      "item": "HEX",
+      "limb": "R",
+      "label": "ATYPICAL",
+      "confidence": 0.81
+    },
+    {
+      "item": "HFX",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.93
+    },
+    {
+      "item": "HFX",
+      "limb": "R",
+      "label": "TYPICAL",
+      "confidence": 0.89
+    },
+    {
+      "item": "POB",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.89
+    },
+    {
+      "item": "POB",
+      "limb": "R",
+      "label": "ATYPICAL",
+      "confidence": 0.8
+    },
+    {
+      "item": "PRT",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.89
+    },
+    {
+      "item": "PRT",
+      "limb": "R",
+      "label": "TYPICAL",
+      "confidence": 0.74
+    },
+    {
+      "item": "TSG",
+      "limb": "L",
+      "label": "TYPICAL",
+      "confidence": 0.85
+    },
+    {
+      "item": "TSG",
+      "limb": "R",
+      "label": "TYPICAL",
+      "confidence": 0.92
+    },
+    {
+      "item": "TLT",
+      "limb": "L",
+      "label": "ATYPICAL",
+      "confidence": 0.76
+    },
+    {
+      "item": "TLT",
+      "limb": "R",
+      "label": "TYPICAL",
+      "confidence": 0.76
+    }
+  ]
+}

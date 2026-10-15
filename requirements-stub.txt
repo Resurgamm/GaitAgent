@@ -1,0 +1,5 @@
+# API-only stub environment. Python 3.11 or 3.12.
+fastapi>=0.115.0
+starlette
+uvicorn[standard]>=0.32.0
+python-multipart>=0.0.12

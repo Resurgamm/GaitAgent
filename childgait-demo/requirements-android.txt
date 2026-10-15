@@ -1,0 +1,5 @@
+# Android SDK packages. This is an sdkmanager package file, NOT a pip file.
+# Run from childgait-demo/: sdkmanager --package_file=requirements-android.txt
+platform-tools
+platforms;android-35
+build-tools;35.0.0

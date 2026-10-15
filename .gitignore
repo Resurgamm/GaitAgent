@@ -1,0 +1,50 @@
+# Credentials and machine-local configuration (never force-add these)
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+.aws/
+.ssh/
+credentials.json
+service-account*.json
+local.properties
+
+# Local toolchains, caches, and generated binaries
+toolchain/
+.gradle/
+.venv/
+venv/
+__pycache__/
+*.pyc
+build/
+*.apk
+*.aab
+*.log
+.DS_Store
+
+# Footage and generated assessment results: review consent before sharing
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.ndjson
+uploads/
+reports/
+sessions/
+private/
+childgait-demo/docs/screenshots/
+
+# Trained weights and local datasets: review ownership/privacy before sharing
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+data/
+work_dir/

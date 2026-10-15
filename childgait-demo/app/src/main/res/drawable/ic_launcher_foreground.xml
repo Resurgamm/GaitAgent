@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- A walking figure, centred in the adaptive-icon safe zone. -->
+    <path
+        android:fillColor="#B6ECE7"
+        android:pathData="M58.5,30.5m-5.5,0a5.5,5.5 0 1,0 11,0a5.5,5.5 0 1,0 -11,0" />
+    <path
+        android:strokeColor="#B6ECE7"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M57,40 L54,54 L46,68" />
+    <path
+        android:strokeColor="#B6ECE7"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M54,54 L63,64 L64,78" />
+    <path
+        android:strokeColor="#B6ECE7"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M56,44 L47,50" />
+    <path
+        android:strokeColor="#B6ECE7"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M56,44 L66,52" />
+</vector>

@@ -1,0 +1,13 @@
+# Inference runtime for supplied pretrained checkpoints. Python 3.11 or 3.12.
+# Install a torch/torchvision build compatible with your CUDA driver, if using GPU.
+# No training, optimizer, experiment-tracking, or augmentation-only dependencies.
+torch
+torchvision
+timm==0.4.12
+
+# Required by inference.py and the eagerly imported dataset package.
+numpy
+pandas
+Pillow
+opencv-python-headless
+decord

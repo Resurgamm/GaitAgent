@@ -1,0 +1,49 @@
+GaitAgent Android frontend environment requirements
+This is an inventory, NOT a pip requirements file.
+Install Android libraries through the existing Gradle build.
+
+[Toolchain]
+JDK = 17
+Gradle = 8.10.2 (Gradle Wrapper)
+Android compile SDK = 35
+Android target SDK = 35
+Android minimum API = 26
+Android Build Tools = 35.0.0
+Android Platform Tools = installed through sdkmanager
+Python = 3.11 or 3.12 (optional tools; standard library only)
+Swift + AVFoundation = macOS only (optional synthetic-video generator)
+
+[Gradle plugins]
+com.android.application = 8.7.3
+org.jetbrains.kotlin.android = 2.0.21
+org.jetbrains.kotlin.plugin.compose = 2.0.21
+org.jetbrains.kotlin.plugin.serialization = 2.0.21
+
+[Maven libraries: main, debug, and test]
+androidx.core:core-ktx = 1.15.0
+androidx.lifecycle:lifecycle-runtime-ktx = 2.8.7
+androidx.lifecycle:lifecycle-viewmodel-compose = 2.8.7
+androidx.activity:activity-compose = 1.9.3
+androidx.compose:compose-bom = 2024.11.00
+androidx.compose.ui:ui = managed by androidx.compose:compose-bom:2024.11.00
+androidx.compose.ui:ui-graphics = managed by androidx.compose:compose-bom:2024.11.00
+androidx.compose.ui:ui-tooling = managed by androidx.compose:compose-bom:2024.11.00
+androidx.compose.ui:ui-tooling-preview = managed by androidx.compose:compose-bom:2024.11.00
+androidx.compose.material3:material3 = managed by androidx.compose:compose-bom:2024.11.00
+androidx.compose.material:material-icons-extended = managed by androidx.compose:compose-bom:2024.11.00
+androidx.media3:media3-exoplayer = 1.4.1
+androidx.media3:media3-ui = 1.4.1
+com.google.mlkit:pose-detection = 18.0.0-beta5
+org.jetbrains.kotlinx:kotlinx-serialization-json = 1.7.3
+org.jetbrains.kotlinx:kotlinx-coroutines-android = 1.9.0
+org.jetbrains.kotlinx:kotlinx-coroutines-test = 1.9.0
+com.squareup.okhttp3:okhttp = 4.12.0
+junit:junit = 4.13.2
+
+[Install SDK packages]
+sdkmanager --package_file=requirements-android.txt
+sdkmanager --licenses
+
+[Build]
+Windows: .\gradlew.bat assembleDebug
+macOS/Linux: ./gradlew assembleDebug

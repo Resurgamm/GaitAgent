@@ -1,0 +1,763 @@
+<title>ChildGait Backend Handover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600&family=IBM+Plex+Sans:wght@400;450;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  /* ── Tokens: complete light palette on bare :root ───────────────────────── */
+  :root {
+    --ground:        #f5f7f8;
+    --surface:       #ffffff;
+    --sunken:        #eaeef0;
+    --ink:           #12171b;
+    --ink-soft:      #454f58;
+    --ink-faint:     #6d7883;
+    --rule:          #d9e0e4;
+    --rule-strong:   #b9c4ca;
+
+    --teal:          #2f7d79;
+    --teal-wash:     #e2efee;
+    --sagittal:      #1f6688;
+    --sagittal-wash: #e2edf3;
+    --coronal:       #85560d;
+    --coronal-wash:  #f6ecda;
+    --alert:         #983926;
+    --alert-wash:    #f8e9e5;
+    --ok:            #2c6641;
+
+    --shadow: 0 1px 2px rgba(18, 23, 27, .05), 0 8px 24px -16px rgba(18, 23, 27, .18);
+
+    --measure: 68ch;
+    --step--1: .82rem;
+    --step-0:  1rem;
+    --step-1:  1.19rem;
+    --step-2:  1.48rem;
+    --step-3:  1.95rem;
+    --step-4:  2.6rem;
+  }
+
+  /* Default "system" state: only prefers-color-scheme separates the two. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:        #0f1417;
+      --surface:       #161c20;
+      --sunken:        #1d252a;
+      --ink:           #e3e8ea;
+      --ink-soft:      #a9b4bb;
+      --ink-faint:     #7d8890;
+      --rule:          #2a343a;
+      --rule-strong:   #3d4a51;
+
+      --teal:          #7cc9c3;
+      --teal-wash:     #16302f;
+      --sagittal:      #74bcdd;
+      --sagittal-wash: #14262f;
+      --coronal:       #e2a851;
+      --coronal-wash:  #2e2312;
+      --alert:         #e59583;
+      --alert-wash:    #33201b;
+      --ok:            #85cf9c;
+
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 30px -18px rgba(0, 0, 0, .7);
+    }
+  }
+
+  /* Explicit dark choice wins over a light OS. */
+  :root[data-theme="dark"] {
+    --ground:        #0f1417;
+    --surface:       #161c20;
+    --sunken:        #1d252a;
+    --ink:           #e3e8ea;
+    --ink-soft:      #a9b4bb;
+    --ink-faint:     #7d8890;
+    --rule:          #2a343a;
+    --rule-strong:   #3d4a51;
+
+    --teal:          #7cc9c3;
+    --teal-wash:     #16302f;
+    --sagittal:      #74bcdd;
+    --sagittal-wash: #14262f;
+    --coronal:       #e2a851;
+    --coronal-wash:  #2e2312;
+    --alert:         #e59583;
+    --alert-wash:    #33201b;
+    --ok:            #85cf9c;
+
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 30px -18px rgba(0, 0, 0, .7);
+  }
+
+  /* ── Base ──────────────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-size: var(--step-0);
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0 clamp(1rem, 5vw, 3rem) 6rem;
+  }
+
+  .page { max-width: 82ch; margin: 0 auto; }
+
+  h1, h2, h3 {
+    font-family: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    text-wrap: balance;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -.012em;
+  }
+
+  p, ul, ol { max-width: var(--measure); }
+  p { margin: 0; }
+
+  a { color: var(--teal); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+  a:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  code, kbd {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .875em;
+  }
+
+  p code, li code, td code, th code {
+    background: var(--sunken);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: .08em .34em;
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: var(--step--1);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ── Masthead ──────────────────────────────────────────────────────────── */
+  header.masthead {
+    padding: clamp(3rem, 9vw, 5.5rem) 0 2.5rem;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  h1 { font-size: var(--step-4); }
+
+  .standfirst {
+    font-size: var(--step-1);
+    color: var(--ink-soft);
+    max-width: 58ch;
+  }
+
+  /* The document's thesis, stated as state rather than prose. */
+  .status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--teal);
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+  }
+  .status div { display: flex; flex-direction: column; gap: .1rem; }
+  .status dt {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--step--1);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .status dd { margin: 0; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .status .done { color: var(--ok); }
+  .status .open { color: var(--coronal); }
+
+  /* ── Numbered sections: the doc is a worked-through sequence ────────────── */
+  section.step {
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    gap: 0 1.25rem;
+    padding: 3.25rem 0 0;
+  }
+  section.step > .num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--step--1);
+    font-weight: 500;
+    color: var(--ink-faint);
+    padding-top: .5rem;
+    font-variant-numeric: tabular-nums;
+  }
+  section.step > .body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
+  }
+  section.step h2 { font-size: var(--step-2); }
+
+  @media (max-width: 640px) {
+    section.step { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+    section.step > .num { padding-top: 0; }
+  }
+
+  h3 { font-size: var(--step-1); margin-top: .75rem; }
+
+  ul, ol { padding-left: 1.35rem; display: flex; flex-direction: column; gap: .45rem; margin: 0; }
+  li { padding-left: .15rem; }
+
+  /* ── Code ──────────────────────────────────────────────────────────────── */
+  pre {
+    margin: 0;
+    padding: 1rem 1.15rem;
+    background: var(--sunken);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: var(--step--1);
+    line-height: 1.6;
+    tab-size: 2;
+  }
+  pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+  .cm { color: var(--ink-faint); }
+  .ky { color: var(--sagittal); font-weight: 500; }
+  .st { color: var(--coronal); }
+
+  /* ── Tables ────────────────────────────────────────────────────────────── */
+  .scroller { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: var(--step--1); }
+  th, td { text-align: left; padding: .55rem .8rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .74rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    background: var(--sunken);
+    white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num, th.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+  td.mono { font-family: "IBM Plex Mono", monospace; white-space: nowrap; }
+
+  /* ── Plane chips: the split that governs the whole contract ─────────────── */
+  .chip {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .7rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: .12rem .45rem;
+    border-radius: 3px;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .chip.sag { background: var(--sagittal-wash); color: var(--sagittal); border: 1px solid color-mix(in srgb, var(--sagittal) 30%, transparent); }
+  .chip.cor { background: var(--coronal-wash);  color: var(--coronal);  border: 1px solid color-mix(in srgb, var(--coronal) 34%, transparent); }
+
+  .planes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+  .plane {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.15rem 1.25rem;
+    display: flex; flex-direction: column; gap: .6rem;
+  }
+  .plane.sag { border-top: 3px solid var(--sagittal); }
+  .plane.cor { border-top: 3px solid var(--coronal); }
+  .plane .count { font-family: "IBM Plex Serif", serif; font-size: var(--step-3); line-height: 1; font-variant-numeric: tabular-nums; }
+  .plane .count small { font-family: "IBM Plex Sans", sans-serif; font-size: var(--step--1); color: var(--ink-faint); font-weight: 450; }
+  .plane .codes { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .plane p { font-size: var(--step--1); color: var(--ink-soft); max-width: none; }
+
+  /* ── Callouts ──────────────────────────────────────────────────────────── */
+  .note {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--rule-strong);
+    border-radius: 3px;
+    padding: 1rem 1.15rem;
+    display: flex; flex-direction: column; gap: .6rem;
+  }
+  .note > .eyebrow { color: var(--ink-faint); }
+  .note p, .note ul, .note ol { max-width: none; font-size: var(--step--1); }
+
+  .note.warn { border-left-color: var(--alert); background: var(--alert-wash); }
+  .note.warn > .eyebrow { color: var(--alert); }
+  .note.key { border-left-color: var(--teal); background: var(--teal-wash); }
+  .note.key > .eyebrow { color: var(--teal); }
+
+  /* ── Question list: open items needing an answer from the backend team ─── */
+  ol.questions { list-style: none; padding: 0; gap: .75rem; }
+  ol.questions li {
+    display: grid;
+    grid-template-columns: 1.6rem minmax(0, 1fr);
+    gap: .75rem;
+    padding: .85rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    font-size: var(--step--1);
+  }
+  ol.questions .q {
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--coronal);
+    font-weight: 500;
+  }
+  ol.questions strong { display: block; font-weight: 600; color: var(--ink); margin-bottom: .12rem; }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    display: flex; flex-direction: column; gap: .4rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <p class="eyebrow">Handover · Android client → model serving</p>
+    <h1>ChildGait Backend Handover</h1>
+    <p class="standfirst">
+      The Android app is complete and verified. The only thing missing is a served model. This is
+      the contract it expects, and the decisions that come with it.
+    </p>
+    <dl class="status">
+      <div><dt>Android client</dt><dd class="done">Complete · 13 tests · lint clean</dd></div>
+      <div><dt>Scoring</dt><dd class="open">Mocked — awaiting model</dd></div>
+      <div><dt>Pose estimation</dt><dd class="done">Real · ML Kit, on device</dd></div>
+      <div><dt>Client changes needed</dt><dd class="done">One line</dd></div>
+    </dl>
+  </header>
+
+  <section class="step">
+    <div class="num">01</div>
+    <div class="body">
+      <h2>What you are replacing</h2>
+      <p>The app has exactly one seam:</p>
+<pre><code><span class="cm">// data/engine/GaitAnalyzer.kt</span>
+<span class="ky">interface</span> GaitAnalyzer {
+    <span class="ky">val</span> engineName: String
+    <span class="ky">val</span> isMock: Boolean
+    <span class="ky">fun</span> analyze(input: SessionInput): Flow&lt;AnalysisProgress&gt;
+}</code></pre>
+      <p>
+        Two implementations sit behind it. <code>MockGaitAnalyzer</code> fabricates a report;
+        <code>RemoteGaitAnalyzer</code> is a stub carrying this contract in its KDoc. To switch:
+      </p>
+<pre><code><span class="cm">// di/AppModule.kt</span>
+<span class="ky">fun</span> gaitAnalyzer(context: Context): GaitAnalyzer =
+    RemoteGaitAnalyzer(baseUrl = <span class="st">"https://…"</span>)     <span class="cm">// was MockGaitAnalyzer { … }</span></code></pre>
+      <div class="note warn">
+        <p class="eyebrow">Leave isMock true until scores are real</p>
+        <p>
+          Setting <code>isMock = false</code> removes the “DEMO — mock inference” banner. Keep it
+          true through integration testing: that banner is the only thing stopping a screenshot of
+          synthetic output being taken for a clinical result.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">02</div>
+    <div class="body">
+      <h2>The input you receive</h2>
+      <p>Two short clips per assessment, uploaded together.</p>
+      <div class="planes">
+        <div class="plane sag">
+          <span class="chip sag">sagittal</span>
+          <div class="count">22 <small>scores</small></div>
+          <p>Lateral camera, side-on to the walkway. 11 items × 2 limbs.</p>
+        </div>
+        <div class="plane cor">
+          <span class="chip cor">coronal</span>
+          <div class="count">12 <small>scores</small></div>
+          <p>Walkway-end camera, facing the child. 6 items × 2 limbs.</p>
+        </div>
+      </div>
+      <p>
+        This mirrors the CGV capture protocol: a primary camera at the terminus of an 8 m walkway
+        for the coronal view, and a secondary camera oriented orthogonally, facing the middle of
+        the walkway, for the sagittal view. Both run simultaneously. Clips are typically 3–5
+        seconds — one walk past the camera.
+      </p>
+      <div class="note key">
+        <p class="eyebrow">The plane is declared, not inferred</p>
+        <p>
+          The app presents two labeled slots and will not submit until both are filled. Do not try
+          to detect which clip is which — you are being told, and the assignment is authoritative.
+        </p>
+      </div>
+      <p>
+        Clips come from the device photo picker, so expect H.264/HEVC MP4, 480p to 4K, 24–60 fps,
+        arbitrary rotation metadata, and occasionally a clip where the child leaves frame.
+      </p>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">03</div>
+    <div class="body">
+      <h2>The endpoint</h2>
+      <p>
+        Both clips are short, so this is a single round trip — no event stream, no job polling.
+        Exactly two multipart parts, named <code>sagittal</code> and <code>coronal</code>.
+      </p>
+<pre><code>POST {baseUrl}/v1/assessments
+Content-Type: multipart/form-data</code></pre>
+      <h3>Success — 200</h3>
+<pre><code>{
+  <span class="ky">"patternSummary"</span>: <span class="st">"Findings consistent with right spastic hemiplegia — unilateral
+                      right-sided deviation with a compensating left limb."</span>,
+  <span class="ky">"clipQuality"</span>: { <span class="ky">"SAGITTAL"</span>: 0.88, <span class="ky">"CORONAL"</span>: 0.81 },
+  <span class="ky">"scores"</span>: [
+    { <span class="ky">"item"</span>: <span class="st">"IC"</span>, <span class="ky">"limb"</span>: <span class="st">"L"</span>, <span class="ky">"label"</span>: <span class="st">"TYPICAL"</span>,  <span class="ky">"confidence"</span>: 0.85 },
+    { <span class="ky">"item"</span>: <span class="st">"IC"</span>, <span class="ky">"limb"</span>: <span class="st">"R"</span>, <span class="ky">"label"</span>: <span class="st">"ATYPICAL"</span>, <span class="ky">"confidence"</span>: 0.89 }
+  ]
+}</code></pre>
+      <p>
+        A complete valid response — all 34 entries — is checked in at
+        <code>docs/example-response.json</code>. Use it as a fixture.
+      </p>
+      <div class="scroller">
+        <table>
+          <thead>
+            <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="mono">patternSummary</td><td>string</td><td>One sentence, shown verbatim on the summary card. Under ~200 chars. Wording matters — see §06.</td></tr>
+            <tr><td class="mono">clipQuality</td><td>object</td><td><code>SAGITTAL</code> and <code>CORONAL</code>, each 0..1. How usable the clip was: framing, occlusion, whether the child stayed in shot. Your channel for “this clip was poor”.</td></tr>
+            <tr><td class="mono">scores</td><td>array</td><td>Exactly <strong>34</strong> entries — 17 items × 2 limbs.</td></tr>
+            <tr><td class="mono">scores[].item</td><td>string</td><td>EVGS code from the table in §04.</td></tr>
+            <tr><td class="mono">scores[].limb</td><td>string</td><td><code>"L"</code> or <code>"R"</code>.</td></tr>
+            <tr><td class="mono">scores[].label</td><td>string</td><td><code>"TYPICAL"</code> or <code>"ATYPICAL"</code>.</td></tr>
+            <tr><td class="mono">scores[].confidence</td><td>number</td><td>0..1. Not 0..100.</td></tr>
+            <tr><td class="mono">scores[].view</td><td>string</td><td>Optional. If present must equal the item's plane; the app derives the plane from the item and ignores a contradictory value. Useful as a self-check.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Failure — 4xx / 5xx</h3>
+<pre><code>{ <span class="ky">"error"</span>: <span class="st">"Sagittal clip contains no detectable person."</span> }</code></pre>
+      <p>The message is shown to the user in a snackbar, so write it for a clinician, not a log file.</p>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">04</div>
+    <div class="body">
+      <h2>The item table and the plane split</h2>
+      <p>
+        This is the part most likely to be got wrong, and it fails silently when it is. Each item
+        is observable from exactly one plane.
+      </p>
+      <div class="scroller">
+        <table>
+          <thead>
+            <tr><th class="num">#</th><th>Code</th><th>Plane</th><th>Item</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="num">1</td><td class="mono">IC</td><td><span class="chip sag">sagittal</span></td><td>Initial Contact in Stance</td></tr>
+            <tr><td class="num">2</td><td class="mono">HL</td><td><span class="chip sag">sagittal</span></td><td>Heel Lift in Stance</td></tr>
+            <tr><td class="num">3</td><td class="mono">SAD</td><td><span class="chip sag">sagittal</span></td><td>Max Ankle Dorsiflexion in Stance</td></tr>
+            <tr><td class="num">4</td><td class="mono">HVV</td><td><span class="chip cor">coronal</span></td><td>Hind-foot Varus/Valgus in Stance</td></tr>
+            <tr><td class="num">5</td><td class="mono">FRT</td><td><span class="chip cor">coronal</span></td><td>Foot Rotation in Stance</td></tr>
+            <tr><td class="num">6</td><td class="mono">FCL</td><td><span class="chip sag">sagittal</span></td><td>Foot Clearance in Swing</td></tr>
+            <tr><td class="num">7</td><td class="mono">WAD</td><td><span class="chip sag">sagittal</span></td><td>Max Ankle Dorsiflexion in Swing</td></tr>
+            <tr><td class="num">8</td><td class="mono">KPA</td><td><span class="chip cor">coronal</span></td><td>Knee Progression Angle in Mid-Stance</td></tr>
+            <tr><td class="num">9</td><td class="mono">KEX</td><td><span class="chip sag">sagittal</span></td><td>Peak Knee Extension in Stance</td></tr>
+            <tr><td class="num">10</td><td class="mono">KPS</td><td><span class="chip sag">sagittal</span></td><td>Knee Position in Terminal Swing</td></tr>
+            <tr><td class="num">11</td><td class="mono">KFX</td><td><span class="chip sag">sagittal</span></td><td>Peak Knee Flexion in Swing</td></tr>
+            <tr><td class="num">12</td><td class="mono">HEX</td><td><span class="chip sag">sagittal</span></td><td>Peak Hip Extension in Stance</td></tr>
+            <tr><td class="num">13</td><td class="mono">HFX</td><td><span class="chip sag">sagittal</span></td><td>Peak Hip Flexion during Swing</td></tr>
+            <tr><td class="num">14</td><td class="mono">POB</td><td><span class="chip cor">coronal</span></td><td>Pelvic Obliquity at Mid-Stance</td></tr>
+            <tr><td class="num">15</td><td class="mono">PRT</td><td><span class="chip cor">coronal</span></td><td>Pelvic Rotation at Mid-Stance</td></tr>
+            <tr><td class="num">16</td><td class="mono">TSG</td><td><span class="chip sag">sagittal</span></td><td>Peak Sagittal Trunk Position in Stance</td></tr>
+            <tr><td class="num">17</td><td class="mono">TLT</td><td><span class="chip cor">coronal</span></td><td>Maximum Trunk Lateral Shift</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="planes">
+        <div class="plane cor">
+          <span class="chip cor">six coronal items</span>
+          <div class="codes">
+            <span class="chip cor">HVV</span><span class="chip cor">FRT</span><span class="chip cor">KPA</span>
+            <span class="chip cor">POB</span><span class="chip cor">PRT</span><span class="chip cor">TLT</span>
+          </div>
+          <p>Hind-foot alignment, transverse rotation, pelvis, trunk shift.</p>
+        </div>
+        <div class="plane sag">
+          <span class="chip sag">eleven sagittal items</span>
+          <div class="codes">
+            <span class="chip sag">IC</span><span class="chip sag">HL</span><span class="chip sag">SAD</span>
+            <span class="chip sag">FCL</span><span class="chip sag">WAD</span><span class="chip sag">KEX</span>
+            <span class="chip sag">KPS</span><span class="chip sag">KFX</span><span class="chip sag">HEX</span>
+            <span class="chip sag">HFX</span><span class="chip sag">TSG</span>
+          </div>
+          <p>Flexion and extension arcs, foot clearance, forward trunk lean.</p>
+        </div>
+      </div>
+      <p>
+        Score each item from the clip whose plane can actually see it. A lateral view cannot
+        resolve hind-foot varus or pelvic obliquity; a frontal view cannot resolve knee flexion arc
+        or forward trunk lean. Scoring <code>KEX</code> off the coronal clip will produce a number,
+        and that number will be meaningless — this split is the entire reason the app takes two
+        clips instead of one.
+      </p>
+      <p>
+        The app surfaces provenance in the UI (“Scored from: Coronal clip”), so a clinician
+        reviewing a finding sees which camera it came from. Getting this wrong is visible to them,
+        not only to you.
+      </p>
+      <h3>Binary, not ordinal</h3>
+      <p>
+        EVGS is natively a three-point scale — 0 normal, 1 moderate deviation, 2 marked deviation.
+        The paper binarises it by merging 1 and 2, because score 2 is too rare in the cohort to
+        learn from, and the app follows suit. So <code>TYPICAL</code> = 0 and
+        <code>ATYPICAL</code> = 1 or 2.
+      </p>
+      <p>
+        If your model produces the full ordinal scale, keep it internally and collapse at the API
+        boundary — but tell us, because surfacing severity is an obvious next step for the UI and
+        we would rather not re-derive it later.
+      </p>
+      <p>
+        Full clinical definitions and the native 0/1/2 criteria for every item live in
+        <code>data/model/Evgs.kt</code>, transcribed from Appendix B of the paper. That is the
+        reference the app shows users; keep your scoring aligned to it.
+      </p>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">05</div>
+    <div class="body">
+      <h2>Validate before you integrate</h2>
+      <p>
+        A response that violates the contract does not crash the app — it renders a report that is
+        quietly wrong, which is worse. So there is a validator.
+      </p>
+<pre><code>./tools/validate-response.py your-response.json
+curl -s -F sagittal=@a.mp4 -F coronal=@b.mp4 $BASE/v1/assessments | ./tools/validate-response.py -</code></pre>
+      <p>
+        It checks all 34 present, no duplicates, the 22/12 plane split, valid codes, valid ranges,
+        and <code>view</code> consistency — plus soft warnings for the mistakes that look
+        plausible, like constant confidences or 0..100 sent as 0..1.
+      </p>
+<pre><code>$ ./tools/validate-response.py docs/example-response.json
+VALID — 34 scores, plane split correct, 0 warning(s)</code></pre>
+      <p>Wire it into your CI.</p>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">06</div>
+    <div class="body">
+      <h2>Wording of patternSummary</h2>
+      <p>
+        This string appears on the summary card directly under the flagged-item count. It is the
+        one piece of free text you control, and it is read by clinicians.
+      </p>
+      <p>The mock's convention is <code>"Findings consistent with &lt;pattern&gt; — &lt;clause&gt;."</code> Note what it deliberately does not do:</p>
+      <ul>
+        <li>It does not name a diagnosis. “Findings consistent with a bilateral equinus pattern” — not “the child has cerebral palsy”.</li>
+        <li>It does not recommend action.</li>
+        <li>It hedges by construction. A screening tool at ~85% per-item accuracy has not diagnosed anything.</li>
+      </ul>
+      <p>
+        If your model has a classification head over conditions, phrase the summary from the
+        observed kinematics rather than the class label. This is a screening aid for a
+        pediatrician, not a report.
+      </p>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">07</div>
+    <div class="body">
+      <h2>Target performance</h2>
+      <p>From Table 4 of the paper — ChildGait-Video per-item accuracy against expert annotation:</p>
+      <div class="scroller">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Pretrain</th><th class="num">Left</th><th class="num">Right</th><th class="num">F1</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ChildGait-Video</strong></td><td>Kinetics-710</td><td class="num"><strong>84%</strong></td><td class="num"><strong>84%</strong></td><td class="num">0.83</td></tr>
+            <tr><td>VideoMAE v2, fine-tuned</td><td>Kinetics-710</td><td class="num">69%</td><td class="num">72%</td><td class="num">0.70</td></tr>
+            <tr><td>Skeleton models (ScoNet best)</td><td>Scoliosis1K</td><td class="num">68%</td><td class="num">70%</td><td class="num">0.67</td></tr>
+            <tr><td>Gait recognition (GaitSet → BiggerGait)</td><td>various</td><td class="num">45–56%</td><td class="num">45–56%</td><td class="num">~0.5</td></tr>
+            <tr><td>Fine-tuned Qwen3-VL-4B</td><td>—</td><td class="num">53%</td><td class="num">53%</td><td class="num">—</td></tr>
+            <tr><td>Zero-shot MLLMs</td><td>—</td><td class="num">50–54%</td><td class="num">53–59%</td><td class="num">—</td></tr>
+            <tr><td>Pediatrician (human baseline)</td><td>—</td><td class="num" colspan="2">93.8%</td><td class="num">ICC 0.93</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note warn">
+        <p class="eyebrow">Two caveats before treating 84% as the bar</p>
+        <p>
+          The test split is small. Per-item accuracies are quantised on denominators of roughly
+          26–28 videos, so a single sample moves a number by about 4 points and the 95% confidence
+          interval on 84% is around ±13.
+        </p>
+        <p>
+          The paper's significance test pools McNemar over the 34 items rather than over samples,
+          which overstates significance given left/right and shared-video dependence.
+        </p>
+        <p>
+          Treat 84% as the right order of magnitude, and build a larger held-out split.
+        </p>
+      </div>
+      <p>
+        The app displays confidences drawn around these published per-item values, so if your
+        calibration differs markedly the numbers on screen will stop matching the paper. That is
+        fine — just expected.
+      </p>
+      <h3>Method, for reference</h3>
+      <p>
+        The paper's winning configuration is a VideoMAE v2 encoder pre-trained on Kinetics-710 and
+        fine-tuned on CGV with two additions: <strong>token-level kinematic prompting</strong>,
+        rendering the skeleton onto the RGB frame so patches carrying joints become implicit
+        kinematic tokens; and <strong>mask-guided patch pruning</strong>, keeping only patches with
+        sufficient foreground mask, deterministically, instead of MAE-style random masking.
+      </p>
+      <p>
+        Ablation: prompting +3, pruning +9, both +15 over the VideoMAE v2 baseline. Random masking
+        <em>hurts</em>. Input is 16 frames at 30 fps; 32 frames gained a further ~3.7 points at
+        quadratic cost.
+      </p>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">08</div>
+    <div class="body">
+      <h2>Consent and data handling</h2>
+      <div class="note warn">
+        <p class="eyebrow">Read before your first request</p>
+        <p>
+          The app currently has <strong>no network code at all</strong>. That is why the import
+          screen says “Clips stay on this device. Nothing is uploaded.” The moment
+          <code>RemoteGaitAnalyzer</code> goes live, pediatric clinical video starts leaving the
+          device and that statement becomes false.
+        </p>
+      </div>
+      <p>Before you ship:</p>
+      <ol>
+        <li><strong>The UI copy must change.</strong> <code>ImportScreen.kt</code> and the README both make the no-upload claim.</li>
+        <li><strong>Consent is separate from the code.</strong> The CGV dataset was collected under IRB approval 202106202 as a retrospective study. Live upload from a clinic is a different activity and needs its own review.</li>
+        <li><strong>De-identification.</strong> The dataset pipeline mosaics faces (RetinaFace + SAM 3) with manual verification of every output. Clips arriving from a phone are not de-identified. Decide whether that happens on device before upload or server-side on receipt — and if server-side, raw video exists on your infrastructure and that has to be justified.</li>
+        <li><strong>Retention.</strong> Decide whether clips are kept after scoring. The dataset licence (CC BY-NC 4.0) forbids using this video as foundation-model training material without separate authorisation; clips uploaded from clinics are not covered by it at all.</li>
+        <li><strong>Transport.</strong> TLS, obviously. Also no identifiers in URLs or logs, and consider whether a <code>sessionId</code> should be derivable from anything.</li>
+      </ol>
+      <p>
+        None of this is the app's problem to solve, which is exactly why it is on this list — it
+        will otherwise fall between the two teams.
+      </p>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">09</div>
+    <div class="body">
+      <h2>Running the app to test against</h2>
+<pre><code>./setup-toolchain.sh          <span class="cm"># once: JDK + SDK + Gradle into ./toolchain, nothing global</span>
+source env.sh
+./gradlew assembleDebug</code></pre>
+      <p>To exercise the flow without a phone:</p>
+<pre><code>sdkmanager --sdk_root="$ANDROID_HOME" emulator "system-images;android-35;google_apis;arm64-v8a"
+./run-emulator.sh --headless
+./tools/make-test-video.sh 4 --push     <span class="cm"># generates and pushes both synthetic clips</span></code></pre>
+      <p>
+        <code>tools/dev-loop.sh</code> rebuilds, reinstalls and screenshots on every save in about
+        two seconds — the fastest way to see your responses rendered.
+        <code>tools/uidrive.py</code> drives the UI by on-screen label if you want to script it.
+      </p>
+      <p>
+        The synthetic clips are stick figures: fine for exercising the report, useless as model
+        input. Use real footage for anything involving pose.
+      </p>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">10</div>
+    <div class="body">
+      <h2>Open questions for you</h2>
+      <p>Positions the app has taken that you may want to revisit.</p>
+      <ol class="questions">
+        <li>
+          <span class="q">Q1</span>
+          <span><strong>Ordinal vs binary</strong>We collapse to typical/atypical because the paper does. If your model gives 0/1/2 reliably, say so and we will surface severity.</span>
+        </li>
+        <li>
+          <span class="q">Q2</span>
+          <span><strong>Per-clip confidence</strong><code>clipQuality</code> is one number per clip. If you can report <em>why</em> a clip scored poorly — child left frame, occlusion, too few gait cycles — that is more actionable and we would show it.</span>
+        </li>
+        <li>
+          <span class="q">Q3</span>
+          <span><strong>Latency budget</strong>The mock takes 3–7 s deliberately. If real inference takes 30 s or more we should move to a job-and-poll model rather than a blocking request. Tell us early; it changes the progress UI.</span>
+        </li>
+        <li>
+          <span class="q">Q4</span>
+          <span><strong>Which items your model is weakest on</strong>The paper's worst are <code>WAD</code> (70% left) and <code>SAD</code> (74% right). If certain items are unreliable, returning them with a low confidence beats returning them confidently — the UI already renders confidence per item.</span>
+        </li>
+        <li>
+          <span class="q">Q5</span>
+          <span><strong>Single-clip fallback</strong>Both clips are currently required. If a clinician only has one, we could score that plane and mark the other 6 or 11 items unobserved. Worth doing?</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">↳</div>
+    <div class="body">
+      <h2>Reference</h2>
+      <div class="scroller">
+        <table>
+          <thead><tr><th>Thing</th><th>Where</th></tr></thead>
+          <tbody>
+            <tr><td>The interface you implement</td><td class="mono">data/engine/GaitAnalyzer.kt</td></tr>
+            <tr><td>Contract, in code</td><td class="mono">data/engine/RemoteGaitAnalyzer.kt</td></tr>
+            <tr><td>Where to flip the binding</td><td class="mono">di/AppModule.kt</td></tr>
+            <tr><td>Item definitions and criteria</td><td class="mono">data/model/Evgs.kt</td></tr>
+            <tr><td>Golden response fixture</td><td class="mono">docs/example-response.json</td></tr>
+            <tr><td>Contract validator</td><td class="mono">tools/validate-response.py</td></tr>
+            <tr><td>What the mock does, and why</td><td class="mono">README.md</td></tr>
+            <tr><td>Screenshots of every screen</td><td class="mono">docs/screenshots/</td></tr>
+            <tr><td>Recorded walkthrough</td><td class="mono">demo.mp4</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      Canonical source: <code>docs/BACKEND_HANDOVER.md</code> in the childgait-demo repository.
+      This page mirrors it — edit the Markdown, then republish.
+    </p>
+    <p>
+      All EVGS scores in the app are currently synthetic. Not for clinical use.
+    </p>
+  </footer>
+
+</div>

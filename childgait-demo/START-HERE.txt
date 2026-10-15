@@ -1,0 +1,30 @@
+ChildGait — Android demo of pediatric EVGS gait scoring
+=======================================================
+
+The app is complete. Scoring is mocked; the model backend is what remains to be built.
+
+Read in this order:
+
+  1. docs/BACKEND_HANDOVER.md   If you are building the model backend. Start here.
+                                Contract, item table, performance targets, consent decisions.
+
+  2. README.md                  What the app is, how to build it, how the mock works,
+                                and what has and has not been verified.
+
+  3. demo.mp4                   102-second recorded walkthrough of the running app.
+                                docs/screenshots/ has stills of every screen.
+
+To just look at the app:
+  adb install -r prebuilt/app-arm64-v8a-debug.apk
+
+To build from source (installs a project-local JDK + Android SDK into ./toolchain,
+nothing global, ~3 GB):
+  ./setup-toolchain.sh
+  source env.sh
+  ./gradlew test          # 13 unit tests
+  ./gradlew assembleDebug
+
+To test a backend response against the contract:
+  ./tools/validate-response.py docs/example-response.json
+
+Not for clinical use. All scores in this build are synthetic.

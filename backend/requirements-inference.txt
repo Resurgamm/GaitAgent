@@ -1,0 +1,19 @@
+# FastAPI service + inference runtime for supplied pretrained checkpoints.
+# Python 3.11 or 3.12. All direct runtime packages are listed explicitly.
+# Choose a torch/torchvision build compatible with the deployment GPU driver.
+# Native decoder availability depends on the deployment OS/architecture.
+
+fastapi>=0.115.0
+starlette
+uvicorn[standard]>=0.32.0
+python-multipart>=0.0.12
+
+torch
+torchvision
+timm==0.4.12
+
+numpy
+pandas
+Pillow
+opencv-python-headless
+decord
